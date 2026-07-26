@@ -1,76 +1,94 @@
 <div align="center">
 
-# 🖧 RouterForge NOC
+# 💻 Portfólio — Luciano Veiga
 
-### Gerador de configurações MikroTik com failover, feito para operação de NOC
+### Network & Infrastructure Manager | AWS | DevSecOps
 
-![RouterOS](https://img.shields.io/badge/RouterOS-MikroTik-red?style=for-the-badge&logo=mikrotik)
-![GitHub Pages](https://img.shields.io/badge/Deploy-GitHub%20Pages-2ea44f?style=for-the-badge&logo=github)
-![Status](https://img.shields.io/badge/status-ativo-brightgreen?style=for-the-badge)
-![License](https://img.shields.io/badge/license-MIT-blue?style=for-the-badge)
+[![Live Demo](https://img.shields.io/badge/DEMO-Acessar-00e676?style=for-the-badge&logo=github)](https://luciano-veiga.github.io/portfolio/)
+[![Free](https://img.shields.io/badge/USO-100%25Gratuito-008d9f?style=for-the-badge)](https://luciano-veiga.github.io/portfolio/)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-lucianoveiga--ti-0077B5?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/lucianoveiga-ti)
+[![GitHub](https://img.shields.io/badge/GitHub-luciano--veiga-333?style=for-the-badge&logo=github)](https://github.com/luciano-veiga)
 
 </div>
 
 ---
 
-## 📡 Sobre o projeto
+## O que é?
 
-O **RouterForge NOC** é uma ferramenta que gera configurações prontas para roteadores **MikroTik**, com foco em **failover de múltiplos links** para operações de provedores de internet (ISPs).
+Portfólio profissional com identidade visual inspirada em ambientes de NOC e monitoramento de rede: terminal de boot, status de sistema, e conteúdo organizado como se fosse saída de comandos reais (`whoami`, `nmap`, `ps aux`, `traceroute`).
 
-Nasceu da rotina real de NOC: reduzir o tempo entre "o link caiu" e "o cliente nem percebeu", automatizando a geração de scripts que hoje muita gente ainda escreve na mão.
-
-🔗 **Demo ao vivo:** [link do GitHub Pages aqui]
+Construído com HTML5, CSS3 e JavaScript puro. Zero dependências externas, zero frameworks.
 
 ---
 
-## ⚙️ Principais funcionalidades
+## Demo ao vivo
 
-- Geração automática de configuração de **failover entre múltiplos links WAN**
-- Templates prontos para cenários comuns de ISP (link primário + backup, balanceamento, PCC)
-- Interface simples, pensada para uso rápido durante atendimento ou implantação
-- Scripts exportáveis direto para colar no terminal do RouterOS
+> **[luciano-veiga.github.io/portfolio](https://luciano-veiga.github.io/portfolio/)**
 
 ---
 
-## 🖥️ Stack
+## Seções
 
-`[preencher: HTML / JS / Python / etc — o que o projeto realmente usa]`
+| Seção | Conteúdo |
+| --- | --- |
+| **Sobre** | Apresentação profissional e principais dados |
+| **Skills** | Habilidades técnicas em formato de scan de rede |
+| **Certificações** | AWS Cloud Practitioner, AWS SAA, especialização SecDevOps/DevOps (Hackers do Bem) |
+| **Trajetória** | Evolução de carreira em formato de traceroute |
+| **Projetos** | Repositórios em destaque, em formato de lista de processos |
+| **Contato** | Links diretos para LinkedIn e GitHub |
 
 ---
 
-## 🚀 Como usar
+## Funcionalidades
 
-```bash
-# Clone o repositório
-git clone https://github.com/luciano-veiga/routerforge-noc.git
+- Terminal de abertura com efeito de digitação e cursor piscante
+- Barra de status fixa com indicador de sistema "online"
+- Layout responsivo, com foco visível de teclado e respeito a `prefers-reduced-motion`
+- Seções em formato de saída de comandos reais de rede (nmap, ps aux, traceroute)
 
-# Entre na pasta
-cd routerforge-noc
+---
 
-# [preencher: comando para rodar localmente, se aplicável]
+## Stack
+
+- HTML5 + CSS3 + JavaScript vanilla
+- Fontes: JetBrains Mono + Inter (Google Fonts)
+- Hospedagem: GitHub Pages (gratuito)
+- Zero dependências — arquivo único
+
+---
+
+## Estrutura
+
+```
+portfolio/
+├── index.html    # Aplicação completa em arquivo único
+└── README.md     # Este arquivo
 ```
 
-Ou acesse direto pela versão publicada no GitHub Pages (link acima).
+---
+
+## Projetos em destaque
+
+**RouterForge NOC**
+Gerador de configuração MikroTik com failover automático entre até 3 links WAN. Script RouterOS completo com Netwatch, NAT, Firewall e QoS.
+Acesse: [luciano-veiga.github.io/-routerforge-noc](https://luciano-veiga.github.io/-routerforge-noc/)
 
 ---
 
-## 🗺️ Roadmap
+## Licença
 
-- [ ] Suporte a mais cenários de failover (3+ links)
-- [ ] Exportação de configuração em lote
-- [ ] Integração com IXC Provider para leitura de clientes/links
-
----
-
-## 👤 Autor
-
-**Luciano Veiga**
-Network & Infrastructure Manager | AWS Certified | DevSecOps
-
-[LinkedIn](https://www.linkedin.com/in/lucianoveiga-ti/) · [GitHub](https://github.com/luciano-veiga)
+Projeto de uso livre. Pode adaptar para o seu próprio portfólio.
 
 ---
 
 <div align="center">
-<sub>Feito por quem também já ficou de plantão às 3h da manhã por causa de um BGP mal configurado.</sub>
+
+Desenvolvido por **Luciano Veiga**
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-lucianoveiga--ti-0077B5?style=flat-square&logo=linkedin)](https://www.linkedin.com/in/lucianoveiga-ti)
+[![GitHub](https://img.shields.io/badge/GitHub-luciano--veiga-333?style=flat-square&logo=github)](https://github.com/luciano-veiga)
+
+*Network Infrastructure & Cloud Manager — 20+ anos em redes, ISP e AWS*
+
 </div>

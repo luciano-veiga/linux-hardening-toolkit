@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Luciano Veiga — Network & Infrastructure Manager</title>
+<meta name="description" content="Portfólio de Luciano Veiga: gestão de redes, infraestrutura, AWS e DevSecOps.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0a0e0f;
+    --panel: #10171a;
+    --panel-2: #141d21;
+    --line: #1f2b2e;
+    --text: #c9d6d3;
+    --text-dim: #6f8583;
+    --ok: #3ecf8e;
+    --ok-dim: #235c46;
+    --warn: #f5a623;
+    --crit: #ff5b5b;
+    --cyan: #4fd1c5;
+    --mono: 'JetBrains Mono', ui-monospace, monospace;
+    --sans: 'Inter', system-ui, sans-serif;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  body::before{
+    content:"";
+    position:fixed; inset:0;
+    background-image: repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 3px);
+    pointer-events:none;
+    z-index: 1;
+  }
+
+  a{color:var(--cyan); text-decoration:none;}
+  a:hover{text-decoration:underline;}
+  a:focus-visible, button:focus-visible{outline: 2px solid var(--ok); outline-offset: 3px;}
+
+  .mono{font-family: var(--mono);}
+
+  .wrap{max-width: 920px; margin: 0 auto; padding: 0 24px;}
+
+  /* ---------- status bar ---------- */
+  .statusbar{
+    position: sticky; top:0; z-index: 50;
+    background: rgba(10,14,15,0.9);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--line);
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--text-dim);
+  }
+  .statusbar .wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    padding-top:10px; padding-bottom:10px;
+    gap: 16px;
+  }
+  .statusbar .dot{
+    display:inline-block; width:8px; height:8px; border-radius:50%;
+    background: var(--ok); margin-right:6px;
+    box-shadow: 0 0 6px var(--ok);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse{ 0%,100%{opacity:1;} 50%{opacity:.35;} }
+  .statusbar nav{display:flex; gap:18px;}
+  .statusbar nav a{color:var(--text-dim);}
+  .statusbar nav a:hover{color:var(--ok); text-decoration:none;}
+  .statusbar .right{display:flex; gap:16px; align-items:center;}
+
+  @media (max-width: 640px){
+    .statusbar nav{display:none;}
+  }
+
+  /* ---------- hero ---------- */
+  .hero{
+    position: relative; z-index:2;
+    padding: 90px 0 70px;
+    border-bottom: 1px solid var(--line);
+  }
+  .terminal{
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    overflow:hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+  }
+  .terminal-head{
+    display:flex; align-items:center; gap:8px;
+    padding: 10px 14px;
+    background: var(--panel-2);
+    border-bottom: 1px solid var(--line);
+  }
+  .terminal-head span{width:10px; height:10px; border-radius:50%; display:inline-block;}
+  .terminal-head span:nth-child(1){background:#ff5f56;}
+  .terminal-head span:nth-child(2){background:#ffbd2e;}
+  .terminal-head span:nth-child(3){background:#27c93f;}
+  .terminal-head .path{margin-left:auto; font-family:var(--mono); font-size:12px; color:var(--text-dim);}
+  .terminal-body{
+    padding: 22px 22px 28px;
+    font-family: var(--mono);
+    font-size: 14px;
+  }
+  .terminal-body .line{margin-bottom:6px; color:var(--text-dim);}
+  .terminal-body .prompt{color: var(--ok);}
+  .terminal-body .out{color: var(--text);}
+  .cursor{display:inline-block; width:8px; height:16px; background:var(--ok); vertical-align:middle; animation: blink 1s steps(2) infinite;}
+  @keyframes blink{ 50%{opacity:0;} }
+
+  .hero h1{
+    font-family: var(--mono);
+    font-size: clamp(28px, 5vw, 44px);
+    font-weight: 700;
+    color: #fff;
+    margin-top: 26px;
+    letter-spacing: -0.5px;
+  }
+  .hero .role{
+    color: var(--ok); font-family: var(--mono); font-size: 15px; margin-top: 8px;
+  }
+  .hero p.lead{
+    max-width: 60ch; margin-top: 18px; color: var(--text); font-size: 16px;
+  }
+  .hero .links{margin-top:26px; display:flex; gap:14px; flex-wrap:wrap;}
+  .btn{
+    font-family: var(--mono); font-size: 13px;
+    padding: 10px 16px; border-radius: 6px;
+    border: 1px solid var(--line);
+    color: var(--text);
+    display:inline-flex; align-items:center; gap:8px;
+  }
+  .btn:hover{border-color: var(--ok); color: var(--ok); text-decoration:none;}
+  .btn.primary{background: var(--ok); color:#052014; border-color: var(--ok); font-weight:600;}
+  .btn.primary:hover{background:#54e0a2; color:#052014;}
+
+  /* ---------- sections ---------- */
+  section{position:relative; z-index:2; padding: 64px 0; border-bottom: 1px solid var(--line);}
+  section:last-of-type{border-bottom:none;}
+  .eyebrow{
+    font-family: var(--mono); font-size: 12px; color: var(--text-dim);
+    text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 10px;
+  }
+  .eyebrow .prompt{color:var(--ok);}
+  h2{
+    font-family: var(--mono); font-size: 22px; color:#fff; font-weight:600; margin-bottom: 24px;
+  }
+
+  /* about */
+  .about-grid{display:grid; grid-template-columns: 1.3fr 1fr; gap: 40px;}
+  @media (max-width: 720px){ .about-grid{grid-template-columns:1fr;} }
+  .about-grid p{margin-bottom:14px; color: var(--text);}
+  .facts{
+    background: var(--panel); border:1px solid var(--line); border-radius:8px;
+    padding: 18px 20px; font-family: var(--mono); font-size: 13px;
+    align-self:start;
+  }
+  .facts .row{display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px dashed var(--line);}
+  .facts .row:last-child{border-bottom:none;}
+  .facts .k{color:var(--text-dim);}
+  .facts .v{color:var(--text); text-align:right;}
+
+  /* skills - scan table */
+  .scan{
+    background: var(--panel); border:1px solid var(--line); border-radius:8px;
+    font-family: var(--mono); font-size: 13px; overflow:hidden;
+  }
+  .scan-head, .scan-row{
+    display:grid; grid-template-columns: 1.4fr 1fr 1.6fr;
+    padding: 10px 16px; gap: 10px;
+  }
+  .scan-head{color:var(--text-dim); border-bottom:1px solid var(--line); font-size:11px; text-transform:uppercase; letter-spacing:1px;}
+  .scan-row{border-bottom:1px solid var(--line);}
+  .scan-row:last-child{border-bottom:none;}
+  .state-open{color: var(--ok);}
+  .bars{display:flex; gap:3px; align-items:center;}
+  .bar{width:14px; height:8px; background: var(--line); border-radius:1px;}
+  .bar.on{background: var(--ok);}
+  @media (max-width:600px){
+    .scan-head, .scan-row{grid-template-columns: 1.2fr 0.8fr; font-size:12px;}
+    .scan-head span:nth-child(3), .scan-row .bars{display:none;}
+  }
+
+  /* certifications */
+  .cert-grid{display:grid; grid-template-columns: repeat(2, 1fr); gap: 16px;}
+  @media (max-width:640px){ .cert-grid{grid-template-columns:1fr;} }
+  .cert{
+    background: var(--panel); border:1px solid var(--line); border-radius:8px;
+    padding: 18px 20px;
+  }
+  .cert .badge{
+    display:inline-block; font-family:var(--mono); font-size:11px;
+    color: var(--warn); border:1px solid var(--warn); border-radius:4px;
+    padding: 2px 8px; margin-bottom: 10px;
+  }
+  .cert h3{font-size:15px; color:#fff; margin-bottom:6px;}
+  .cert p{font-size:13px; color: var(--text-dim);}
+
+  /* trajectory - traceroute */
+  .hops{font-family: var(--mono); font-size: 13px;}
+  .hop{
+    display:flex; gap:16px; padding: 14px 0; border-bottom: 1px dashed var(--line);
+    align-items:flex-start;
+  }
+  .hop:last-child{border-bottom:none;}
+  .hop .n{color: var(--text-dim); min-width: 26px;}
+  .hop .role{color:#fff; font-weight:600; min-width: 190px;}
+  .hop .desc{color: var(--text-dim); font-family: var(--sans); font-size: 14px;}
+
+  /* projects - process list */
+  .proc{
+    background: var(--panel); border:1px solid var(--line); border-radius:8px;
+    font-family: var(--mono); font-size: 12.5px; overflow-x:auto;
+  }
+  .proc-head, .proc-row{
+    display:grid; grid-template-columns: 60px 1.6fr 90px 1fr 80px;
+    padding: 10px 16px; gap: 10px; min-width: 560px;
+    align-items:center;
+  }
+  .proc-head{color:var(--text-dim); border-bottom:1px solid var(--line); font-size:11px; text-transform:uppercase; letter-spacing:1px;}
+  .proc-row{border-bottom:1px solid var(--line);}
+  .proc-row:last-child{border-bottom:none;}
+  .proc-row .name{color:#fff;}
+  .proc-row .desc-small{color:var(--text-dim); font-size:11px; font-family:var(--sans); display:block; margin-top:2px;}
+  .status-running{color:var(--ok);}
+  .proc-row a{color:var(--cyan); font-family:var(--mono);}
+
+  /* contact */
+  .contact-box{
+    background: var(--panel); border:1px solid var(--line); border-radius: 8px;
+    padding: 28px; font-family: var(--mono); font-size: 14px;
+  }
+  .contact-box .prompt{color:var(--ok);}
+  .contact-links{margin-top:18px; display:flex; gap:20px; flex-wrap:wrap; font-family:var(--mono); font-size:14px;}
+
+  footer{
+    text-align:center; padding: 30px 0 50px; font-family: var(--mono); font-size:12px; color: var(--text-dim);
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation: none !important; transition: none !important;}
+  }
+</style>
+</head>
+<body>
+
+<div class="statusbar">
+  <div class="wrap">
+    <div><span class="dot"></span>STATUS: ONLINE</div>
+    <nav>
+      <a href="#sobre">sobre</a>
+      <a href="#skills">skills</a>
+      <a href="#certs">certificações</a>
+      <a href="#trajetoria">trajetória</a>
+      <a href="#projetos">projetos</a>
+      <a href="#contato">contato</a>
+    </nav>
+    <div class="right">
+      <span>BA, BR</span>
+    </div>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="terminal">
+      <div class="terminal-head">
+        <span></span><span></span><span></span>
+        <span class="path">~/lucianoveiga — zsh</span>
+      </div>
+      <div class="terminal-body">
+        <div class="line"><span class="prompt">$</span> <span class="out">whoami</span></div>
+        <div class="line">luciano.veiga</div>
+        <div class="line"><span class="prompt">$</span> <span class="out">uptime</span></div>
+        <div class="line">20+ years, 0 unplanned reboots<span class="cursor"></span></div>
+      </div>
+    </div>
+
+    <h1>Luciano Veiga</h1>
+    <div class="role">Network &amp; Infrastructure Manager — Allg Connect Telecom</div>
+    <p class="lead">
+      Cuido de redes de provedor de internet do jeito que gostaria que cuidassem da minha: monitoramento de verdade, failover que funciona, e automação no lugar de trabalho repetitivo. 20+ anos entre NOC, suporte técnico, CFTV e gestão de infraestrutura.
+    </p>
+    <div class="links">
+      <a class="btn primary" href="#projetos">Ver projetos</a>
+      <a class="btn" href="https://github.com/luciano-veiga" target="_blank" rel="noopener">GitHub ↗</a>
+      <a class="btn" href="https://www.linkedin.com/in/lucianoveiga-ti/" target="_blank" rel="noopener">LinkedIn ↗</a>
+    </div>
+  </div>
+</header>
+
+<section id="sobre">
+  <div class="wrap">
+    <div class="eyebrow"><span class="prompt">$</span> cat sobre.md</div>
+    <h2>Sobre</h2>
+    <div class="about-grid">
+      <div>
+        <p>Sou responsável pela infraestrutura de rede e sistemas da Allg Connect Telecom, um provedor de internet brasileiro, onde lidero uma equipe e cuido de tudo que envolve manter uma operação de ISP no ar: monitoramento (Zabbix), gestão de clientes e OS (IXC Provider), e a dor de cabeça favorita de todo NOC, failover de links.</p>
+        <p>Nos últimos anos venho puxando essa experiência de operação pra dentro de nuvem e automação: certificações AWS, um capstone em DevSecOps pelo programa Hackers do Bem (SENAI/RNP/Softex), e uma graduação em Análise e Desenvolvimento de Sistemas em andamento.</p>
+        <p>Gosto de compartilhar isso publicamente, seja em ferramentas open-source que resolvem problemas reais de NOC, ou em conteúdo técnico pra comunidade de TI.</p>
+      </div>
+      <div class="facts">
+        <div class="row"><span class="k">localização</span><span class="v">Livramento de N. Sra, BA</span></div>
+        <div class="row"><span class="k">experiência</span><span class="v">20+ anos em TI</span></div>
+        <div class="row"><span class="k">foco atual</span><span class="v">Cloud / DevSecOps</span></div>
+        <div class="row"><span class="k">formação</span><span class="v">ADS — UniCesumar (2026)</span></div>
+        <div class="row"><span class="k">stack do dia a dia</span><span class="v">MikroTik · Zabbix · IXC</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="eyebrow"><span class="prompt">$</span> nmap --scan-skills -sV</div>
+    <h2>Skills</h2>
+    <div class="scan">
+      <div class="scan-head"><span>Serviço</span><span>Estado</span><span>Nível</span></div>
+
+      <div class="scan-row">
+        <span>redes-ip/roteamento</span>
+        <span class="state-open">open</span>
+        <span class="bars"><span class="bar on"></span><span class="bar on"></span><span class="bar on"></span><span class="bar on"></span><span class="bar on"></span></span>
+      </div>
+      <div class="scan-row">
+        <span>mikrotik/routeros</span>
+        <span class="state-open">open</span>
+        <span class="bars"><span class="bar on"></span><span class="bar on"></span><span class="bar on"></span><span class="bar on"></span><span class="bar"></span></span>
+      </div>
+      <div class="scan-row">
+        <span>monitoramento/zabbix</span>
+        <span class="state-open">open</span>
+        <span class="bars"><span class="bar on"></span><span class="bar on"></span><span class="bar on"></span><span class="bar on"></span><span class="bar"></span></span>
+      </div>
+      <div class="scan-row">
+        <span>aws/cloud</span>
+        <span class="state-open">open</span>
+        <span class="bars"><span class="bar on"></span><span class="bar on"></span><span class="bar on"></span><span class="bar"></span><span class="bar"></span></span>
+      </div>
+      <div class="scan-row">
+        <span>devsecops</span>
+        <span class="state-open">open</span>
+        <span class="bars"><span class="bar on"></span><span class="bar on"></span><span class="bar on"></span><span class="bar"></span><span class="bar"></span></span>
+      </div>
+      <div class="scan-row">
+        <span>gestão de equipe</span>
+        <span class="state-open">open</span>
+        <span class="bars"><span class="bar on"></span><span class="bar on"></span><span class="bar on"></span><span class="bar on"></span><span class="bar"></span></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="certs">
+  <div class="wrap">
+    <div class="eyebrow"><span class="prompt">$</span> ls -la certificações/</div>
+    <h2>Certificações &amp; Formação</h2>
+    <div class="cert-grid">
+      <div class="cert">
+        <span class="badge">AWS</span>
+        <h3>AWS Certified Cloud Practitioner</h3>
+        <p>Fundamentos de arquitetura, serviços e modelo de responsabilidade compartilhada na AWS.</p>
+      </div>
+      <div class="cert">
+        <span class="badge">AWS</span>
+        <h3>AWS Certified Solutions Architect – Associate</h3>
+        <p>Design de arquiteturas resilientes, seguras e custo-eficientes na nuvem.</p>
+      </div>
+      <div class="cert">
+        <span class="badge">SECDEVOPS/DEVOPS</span>
+        <h3>Hackers do Bem — Especialização em SecDevOps/DevOps</h3>
+        <p>Especialização via SENAI/RNP/Softex, com projeto capstone aplicado (Task Manager).</p>
+      </div>
+      <div class="cert">
+        <span class="badge">EM ANDAMENTO</span>
+        <h3>Análise e Desenvolvimento de Sistemas</h3>
+        <p>Graduação pela UniCesumar, conclusão prevista para 2026.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="trajetoria">
+  <div class="wrap">
+    <div class="eyebrow"><span class="prompt">$</span> traceroute carreira</div>
+    <h2>Trajetória</h2>
+    <div class="hops">
+      <div class="hop">
+        <span class="n">1</span>
+        <span class="role">Suporte Técnico</span>
+        <span class="desc">Primeiro contato direto com usuário e problema — a base de qualquer troubleshooting sólido.</span>
+      </div>
+      <div class="hop">
+        <span class="n">2</span>
+        <span class="role">NOC</span>
+        <span class="desc">Monitoramento de rede em tempo real, resposta a incidentes e rotina de operação de ISP.</span>
+      </div>
+      <div class="hop">
+        <span class="n">3</span>
+        <span class="role">CFTV</span>
+        <span class="desc">Projetos e manutenção de sistemas de videomonitoramento.</span>
+      </div>
+      <div class="hop">
+        <span class="n">4</span>
+        <span class="role">Instrutor de TI</span>
+        <span class="desc">Ensinando o que aprendi na prática, formando outros profissionais de TI.</span>
+      </div>
+      <div class="hop">
+        <span class="n">5</span>
+        <span class="role">Network &amp; Infra Manager</span>
+        <span class="desc">Hoje: liderando a operação de redes e infraestrutura da Allg Connect Telecom.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projetos">
+  <div class="wrap">
+    <div class="eyebrow"><span class="prompt">$</span> ps aux | grep projetos</div>
+    <h2>Projetos</h2>
+    <div class="proc">
+      <div class="proc-head"><span>PID</span><span>Processo</span><span>Status</span><span>Stack</span><span>Link</span></div>
+
+      <div class="proc-row">
+        <span>0001</span>
+        <span class="name">routerforge-noc
+          <span class="desc-small">Gerador de config MikroTik com failover automático</span>
+        </span>
+        <span class="status-running">running</span>
+        <span>HTML/CSS/JS</span>
+        <span><a href="https://luciano-veiga.github.io/-routerforge-noc/" target="_blank" rel="noopener">abrir</a></span>
+      </div>
+
+      <div class="proc-row">
+        <span>0002</span>
+        <span class="name">devsecops-task-manager
+          <span class="desc-small">Task manager Flask — capstone Hackers do Bem</span>
+        </span>
+        <span class="status-running">running</span>
+        <span>Python/Flask</span>
+        <span><a href="https://github.com/luciano-veiga/devsecops-task-manager" target="_blank" rel="noopener">repo</a></span>
+      </div>
+
+      <div class="proc-row">
+        <span>0003</span>
+        <span class="name">veiga-agenda
+          <span class="desc-small">PWA de agenda com Firebase</span>
+        </span>
+        <span class="status-running">running</span>
+        <span>PWA/Firebase</span>
+        <span><a href="https://github.com/luciano-veiga" target="_blank" rel="noopener">repo</a></span>
+      </div>
+
+      <div class="proc-row">
+        <span>0004</span>
+        <span class="name">terminal-portfolio
+          <span class="desc-small">Portfólio estilo CLI com efeito CRT</span>
+        </span>
+        <span class="status-running">running</span>
+        <span>HTML/CSS/JS</span>
+        <span><a href="https://github.com/luciano-veiga" target="_blank" rel="noopener">repo</a></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contato">
+  <div class="wrap">
+    <div class="eyebrow"><span class="prompt">$</span> ./contato.sh</div>
+    <h2>Contato</h2>
+    <div class="contact-box">
+      <div><span class="prompt">$</span> echo "Aberto a oportunidades de freelance e colaborações técnicas"</div>
+      <div>Aberto a oportunidades de freelance e colaborações técnicas</div>
+      <div class="contact-links">
+        <a href="https://www.linkedin.com/in/lucianoveiga-ti/" target="_blank" rel="noopener">→ linkedin.com/in/lucianoveiga-ti</a>
+        <a href="https://github.com/luciano-veiga" target="_blank" rel="noopener">→ github.com/luciano-veiga</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    © <span id="year"></span> Luciano Veiga — construído com HTML, CSS e café.
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
