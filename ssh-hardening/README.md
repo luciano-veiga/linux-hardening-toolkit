@@ -46,3 +46,15 @@ sudo systemctl restart sshd
 ## Próxima evolução
 
 Integrar com o `fail2ban-setup` (próximo item do toolkit) para adicionar bloqueio automático de IPs após tentativas falhas.
+
+## Evidência de execução
+
+**Configuração aplicada (destacada em vermelho pelo terminal), seguida de teste de autenticação: login por chave funciona, login sem chave é recusado (`Permission denied (publickey)`):**
+
+![hardening aplicado e teste de autenticação](./docs/hardening-and-auth-test.png)
+
+**Arquivo `sshd_config` completo após o hardening:** [sshd_config_after.txt](./docs/sshd_config_after.txt)
+
+### Nota técnica
+
+O script foi testado dentro de um container Docker Ubuntu 24.04 isolado (não na máquina host), como prática segura para testar mudanças de configuração de SSH sem risco de perda de acesso. O restart do serviço via `systemctl` (usado pelo script) não funciona dentro do container por não haver `systemd` como processo 1 — nesse ambiente de teste, o restart foi feito manualmente via `service ssh restart`. Em um servidor real com `systemd`, o script funciona de ponta a ponta sem esse ajuste manual.
